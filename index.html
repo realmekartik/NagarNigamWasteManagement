@@ -1,0 +1,1797 @@
+# NagarNigamWasteManagement
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero Waste App - Nagar Nigam Lucknow</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            min-height: 100vh;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #06b6d4;
+            --text-color: #1f2937;
+            --surface-color: #ffffff;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --gray-color: #6b7280;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .emblem {
+            font-size: 3.5rem;
+        }
+
+        .navbar-title h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .navbar-subtitle {
+            font-size: 0.75rem;
+            color: var(--gray-color);
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            color: white;
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary, .btn-success, .btn-danger {
+            padding: 0.75rem 2rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+        }
+
+        .btn-danger {
+            background: var(--error-color);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid var(--primary-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray-color);
+            font-weight: 600;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--surface-color);
+        }
+
+        .checkbox-label:hover {
+            background: rgba(30, 64, 175, 0.05);
+            transform: scale(1.02);
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Price Card */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .price-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .price-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .price-unit {
+            font-size: 1.25rem;
+            color: var(--gray-color);
+        }
+
+        /* Vehicle Card */
+        .vehicle-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .vehicle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .vehicle-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .status-maintenance {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .status-approved {
+            background: #dbeafe;
+            color: #3b82f6;
+        }
+
+        .status-completed {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .capacity-bar {
+            width: 100%;
+            height: 1rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .capacity-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 0.5rem;
+        }
+
+        /* Request Card */
+        .request-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin-top: 3rem;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--gray-color);
+        }
+
+        /* Page Display */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .toast-success {
+            background: var(--success-color);
+        }
+
+        .toast-error {
+            background: var(--error-color);
+        }
+
+        .toast-info {
+            background: var(--secondary-color);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .navbar-menu {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats-grid, .price-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Navbar -->
+  <nav class="navbar">
+   <div class="container navbar-container">
+    <div class="navbar-brand">
+     <div class="emblem">
+      ♻️
+     </div>
+     <div class="navbar-title">
+      <h1>Zero Waste App</h1>
+      <div class="navbar-subtitle">
+       Nagar Nigam Lucknow
+      </div>
+     </div>
+    </div>
+    <div class="navbar-menu" id="navbarMenu"><button class="nav-link" onclick="showPage('home')">Home</button> <button class="nav-link" onclick="showPage('about')">About</button> <button class="nav-link" onclick="showPage('prices')">Prices</button> <button class="nav-link" onclick="showPage('trackVehicle')">Track Vehicle</button> <button class="nav-link" onclick="showPage('requestPickup')">Request Pickup</button> <button class="nav-link" onclick="showPage('complaint')">Complaint</button> <button class="nav-link" onclick="showPage('contact')">Contact</button>
+     <div id="authButtons"><button class="btn-primary" onclick="showPage('adminLogin')">Admin Login</button> <button class="btn-secondary" onclick="showPage('publicLogin')">Public Login</button>
+     </div>
+     <div id="userSection" class="hidden"><span id="userName" style="margin-right: 1rem; font-weight: 600;"></span> <button class="btn-primary" onclick="showDashboard()">Dashboard</button> <button class="btn-secondary" onclick="logout()">Logout</button>
+     </div>
+    </div>
+   </div>
+  </nav><!-- Home Page -->
+  <div id="homePage" class="page active">
+   <div class="hero-section">
+    <div class="container">
+     <h1 class="hero-title">🌿 Zero Waste Lucknow</h1>
+     <p class="hero-subtitle">Transform Your Waste into Wealth - Sell Your Recyclables &amp; Earn Money!</p>
+     <p style="font-size: 1.25rem; margin-bottom: 2rem;">नागर निगम लखनऊ - स्वच्छ भारत, स्वस्थ भारत</p>
+     <div class="hero-buttons"><button class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.25rem;" onclick="showPage('requestPickup')"> 🚛 Request Pickup </button> <button class="btn-secondary" style="padding: 1rem 2.5rem; font-size: 1.25rem;" onclick="showPage('prices')"> ♻️ View Prices </button>
+     </div>
+    </div>
+   </div>
+   <div class="container" style="margin-top: 3rem; margin-bottom: 3rem;">
+    <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary-color);">Our Impact</h2>
+    <div class="stats-grid">
+     <div class="stat-card">
+      <div class="stat-icon">
+       👥
+      </div>
+      <div class="stat-value" id="totalUsers">
+       500+
+      </div>
+      <div class="stat-label">
+       Registered Users
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       🚛
+      </div>
+      <div class="stat-value" id="totalPickups">
+       1200+
+      </div>
+      <div class="stat-label">
+       Pickups Completed
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ♻️
+      </div>
+      <div class="stat-value" id="totalWaste">
+       15000 kg
+      </div>
+      <div class="stat-label">
+       Waste Collected
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       💰
+      </div>
+      <div class="stat-value" id="totalEarnings">
+       ₹75000
+      </div>
+      <div class="stat-label">
+       Total Earnings
+      </div>
+     </div>
+    </div>
+    <h2 style="text-align: center; font-size: 2.5rem; margin-top: 4rem; margin-bottom: 2rem; color: var(--primary-color);">How It Works</h2>
+    <div class="stats-grid">
+     <div class="glass-card" style="text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">
+       📱
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Step 1</h3>
+      <p style="font-size: 1.125rem; color: #374151;">Register and request a pickup through our app</p>
+     </div>
+     <div class="glass-card" style="text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">
+       🚛
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Step 2</h3>
+      <p style="font-size: 1.125rem; color: #374151;">Our vehicle arrives at your doorstep</p>
+     </div>
+     <div class="glass-card" style="text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">
+       ⚖️
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Step 3</h3>
+      <p style="font-size: 1.125rem; color: #374151;">We weigh and sort your recyclables</p>
+     </div>
+     <div class="glass-card" style="text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">
+       💰
+      </div>
+      <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">Step 4</h3>
+      <p style="font-size: 1.125rem; color: #374151;">Get paid instantly for your waste!</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- About Page -->
+  <div id="aboutPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card">
+     <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">🌿 About Zero Waste Lucknow</h1>
+     <div style="font-size: 1.25rem; line-height: 1.8; color: #374151;">
+      <p style="margin-bottom: 1.5rem;">Zero Waste Lucknow is an initiative by <strong>Nagar Nigam Lucknow</strong> to promote sustainable waste management and create a cleaner, greener Lucknow. Our mission is to transform the way citizens think about waste by turning it into a valuable resource.</p>
+      <p style="margin-bottom: 1.5rem;">Through our innovative app, residents can easily sell their recyclable waste and earn money while contributing to environmental conservation. We collect various types of recyclables including paper, plastic, metal, glass, and e-waste from your doorstep.</p>
+     </div>
+     <div class="stats-grid" style="margin-top: 3rem;">
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        ♻️
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Our Mission</h3>
+       <p style="color: var(--gray-color);">To achieve zero waste by 2030 through community participation and innovative solutions</p>
+      </div>
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        🤝
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Our Promise</h3>
+       <p style="color: var(--gray-color);">Fair prices, prompt service, and transparent transactions for all citizens</p>
+      </div>
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        🏆
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Our Achievement</h3>
+       <p style="color: var(--gray-color);">Winner of Swachh Bharat Award 2023 for innovative waste management</p>
+      </div>
+     </div>
+     <div style="margin-top: 3rem; padding: 2rem; background: #f0f9ff; border-radius: 1rem;">
+      <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem;">Why Choose Us?</h2>
+      <ul style="font-size: 1.125rem; line-height: 2; color: #374151; list-style: none;">
+       <li>✅ <strong>Doorstep Collection:</strong> We come to your home at your convenience</li>
+       <li>✅ <strong>Fair Pricing:</strong> Best market rates for all recyclables</li>
+       <li>✅ <strong>Instant Payment:</strong> Get paid immediately after collection</li>
+       <li>✅ <strong>Environmental Impact:</strong> Contribute to a cleaner Lucknow</li>
+       <li>✅ <strong>Easy Tracking:</strong> Track your pickups and earnings online</li>
+       <li>✅ <strong>Government Verified:</strong> Official Nagar Nigam initiative</li>
+      </ul>
+     </div>
+     <div style="margin-top: 3rem; text-align: center;">
+      <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;">Join the Movement</h2>
+      <p style="font-size: 1.25rem; color: #374151; margin-bottom: 2rem;">Be part of Lucknow's journey towards becoming a zero-waste city!</p>
+      <p style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">स्वच्छ लखनऊ, स्वस्थ लखनऊ 🌿</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- Prices Page -->
+  <div id="pricesPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 1rem;">Waste Prices</h1>
+    <p style="font-size: 1.25rem; text-align: center; color: var(--gray-color); margin-bottom: 3rem;">Current market rates for recyclable materials (per kg)</p>
+    <div class="price-grid" id="priceGrid">
+     <div class="price-card">
+      <div class="price-icon">
+       🔩
+      </div>
+      <div class="price-name">
+       Steel
+      </div>
+      <div class="price-value">
+       ₹45<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       ⚙️
+      </div>
+      <div class="price-name">
+       Iron/Loha
+      </div>
+      <div class="price-value">
+       ₹40<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       🥫
+      </div>
+      <div class="price-name">
+       Aluminum
+      </div>
+      <div class="price-value">
+       ₹120<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       ♻️
+      </div>
+      <div class="price-name">
+       Plastic
+      </div>
+      <div class="price-value">
+       ₹15<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       📄
+      </div>
+      <div class="price-name">
+       Paper
+      </div>
+      <div class="price-value">
+       ₹8<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       📰
+      </div>
+      <div class="price-name">
+       Newspaper
+      </div>
+      <div class="price-value">
+       ₹10<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       📦
+      </div>
+      <div class="price-name">
+       Cardboard
+      </div>
+      <div class="price-value">
+       ₹6<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       🍾
+      </div>
+      <div class="price-name">
+       Glass
+      </div>
+      <div class="price-value">
+       ₹5<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       🥤
+      </div>
+      <div class="price-name">
+       Coca-Cola Cans
+      </div>
+      <div class="price-value">
+       ₹25<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       🥫
+      </div>
+      <div class="price-name">
+       Metal Cans
+      </div>
+      <div class="price-value">
+       ₹22<span class="price-unit">/kg</span>
+      </div>
+     </div>
+     <div class="price-card">
+      <div class="price-icon">
+       💻
+      </div>
+      <div class="price-name">
+       E-Waste
+      </div>
+      <div class="price-value">
+       ₹30<span class="price-unit">/kg</span>
+      </div>
+     </div>
+    </div>
+    <div class="glass-card">
+     <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem;">📋 Important Notes</h2>
+     <ul style="font-size: 1.125rem; line-height: 2; color: #374151;">
+      <li>✓ Prices are updated regularly based on market conditions</li>
+      <li>✓ Minimum weight for pickup: 5 kg</li>
+      <li>✓ All materials must be clean and sorted</li>
+      <li>✓ Payment is made immediately after weighing</li>
+      <li>✓ Mixed waste may be charged at lower rates</li>
+      <li>✓ Final price depends on quality and condition of materials</li>
+     </ul>
+    </div>
+    <div style="margin-top: 2rem; text-align: center; padding: 2rem; background: #f0f9ff; border-radius: 1rem;">
+     <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Want to know how much your waste is worth?</h3>
+     <p style="font-size: 1.125rem; color: #374151; margin-bottom: 1.5rem;">Request a pickup and our team will provide you with an accurate estimate!</p><button class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.125rem;" onclick="showPage('requestPickup')"> Request Pickup Now </button>
+    </div>
+   </div>
+  </div><!-- Track Vehicle Page -->
+  <div id="trackVehiclePage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 1rem;">Track Vehicles</h1>
+    <p style="font-size: 1.25rem; text-align: center; color: var(--gray-color); margin-bottom: 3rem;">Real-time tracking of waste collection vehicles in Lucknow</p>
+    <div class="glass-card" style="margin-bottom: 2rem;">
+     <div style="display: flex; gap: 1rem; flex-wrap: wrap;"><select id="areaFilter" class="form-select" style="flex: 1; min-width: 200px;"> <option value="">All Areas</option> <option value="Hazratganj">Hazratganj</option> <option value="Gomti Nagar">Gomti Nagar</option> <option value="Aliganj">Aliganj</option> <option value="Indira Nagar">Indira Nagar</option> <option value="Alambagh">Alambagh</option> </select> <button class="btn-primary" onclick="filterVehicles()">Filter</button> <button class="btn-secondary" onclick="loadVehicles()">Refresh</button>
+     </div>
+    </div>
+    <div id="vehiclesList">
+     <div class="vehicle-card">
+      <div class="vehicle-header">
+       <div>
+        <div class="vehicle-title">
+         🚛 UP32-AB-1234
+        </div>
+        <div style="font-size: 1.1rem; color: var(--gray-color); margin-top: 0.25rem;">
+         📍 Hazratganj
+        </div>
+       </div><span class="status-badge status-active">ACTIVE</span>
+      </div>
+      <div style="margin-bottom: 1rem;">
+       <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="font-weight: 600;">Capacity</span> <span style="font-weight: 700; color: #f59e0b;">75%</span>
+       </div>
+       <div class="capacity-bar">
+        <div class="capacity-fill" style="width: 75%; background: #f59e0b;"></div>
+       </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+       <div>
+        <strong>Type:</strong> Compactor Truck
+       </div>
+       <div>
+        <strong>Driver:</strong> Rajesh Kumar
+       </div>
+       <div>
+        <strong>Max Capacity:</strong> 5000 kg
+       </div>
+       <div>
+        <strong>Phone:</strong> 9876543210
+       </div>
+      </div>
+     </div>
+     <div class="vehicle-card">
+      <div class="vehicle-header">
+       <div>
+        <div class="vehicle-title">
+         🚛 UP32-CD-5678
+        </div>
+        <div style="font-size: 1.1rem; color: var(--gray-color); margin-top: 0.25rem;">
+         📍 Gomti Nagar
+        </div>
+       </div><span class="status-badge status-active">ACTIVE</span>
+      </div>
+      <div style="margin-bottom: 1rem;">
+       <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="font-weight: 600;">Capacity</span> <span style="font-weight: 700; color: #10b981;">45%</span>
+       </div>
+       <div class="capacity-bar">
+        <div class="capacity-fill" style="width: 45%; background: #10b981;"></div>
+       </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+       <div>
+        <strong>Type:</strong> Tipper Truck
+       </div>
+       <div>
+        <strong>Driver:</strong> Suresh Singh
+       </div>
+       <div>
+        <strong>Max Capacity:</strong> 4000 kg
+       </div>
+       <div>
+        <strong>Phone:</strong> 9876543211
+       </div>
+      </div>
+     </div>
+     <div class="vehicle-card">
+      <div class="vehicle-header">
+       <div>
+        <div class="vehicle-title">
+         🚛 UP32-EF-9012
+        </div>
+        <div style="font-size: 1.1rem; color: var(--gray-color); margin-top: 0.25rem;">
+         📍 Aliganj
+        </div>
+       </div><span class="status-badge status-active">ACTIVE</span>
+      </div>
+      <div style="margin-bottom: 1rem;">
+       <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="font-weight: 600;">Capacity</span> <span style="font-weight: 700; color: #ef4444;">90%</span>
+       </div>
+       <div class="capacity-bar">
+        <div class="capacity-fill" style="width: 90%; background: #ef4444;"></div>
+       </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+       <div>
+        <strong>Type:</strong> Compactor Truck
+       </div>
+       <div>
+        <strong>Driver:</strong> Manoj Yadav
+       </div>
+       <div>
+        <strong>Max Capacity:</strong> 5000 kg
+       </div>
+       <div>
+        <strong>Phone:</strong> 9876543212
+       </div>
+      </div>
+     </div>
+     <div class="vehicle-card">
+      <div class="vehicle-header">
+       <div>
+        <div class="vehicle-title">
+         🚛 UP32-GH-3456
+        </div>
+        <div style="font-size: 1.1rem; color: var(--gray-color); margin-top: 0.25rem;">
+         📍 Indira Nagar
+        </div>
+       </div><span class="status-badge status-maintenance">MAINTENANCE</span>
+      </div>
+      <div style="margin-bottom: 1rem;">
+       <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="font-weight: 600;">Capacity</span> <span style="font-weight: 700; color: var(--gray-color);">0%</span>
+       </div>
+       <div class="capacity-bar">
+        <div class="capacity-fill" style="width: 0%; background: var(--gray-color);"></div>
+       </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+       <div>
+        <strong>Type:</strong> Tipper Truck
+       </div>
+       <div>
+        <strong>Driver:</strong> Ramesh Verma
+       </div>
+       <div>
+        <strong>Max Capacity:</strong> 4000 kg
+       </div>
+       <div>
+        <strong>Phone:</strong> 9876543213
+       </div>
+      </div>
+     </div>
+     <div class="vehicle-card">
+      <div class="vehicle-header">
+       <div>
+        <div class="vehicle-title">
+         🚛 UP32-IJ-7890
+        </div>
+        <div style="font-size: 1.1rem; color: var(--gray-color); margin-top: 0.25rem;">
+         📍 Alambagh
+        </div>
+       </div><span class="status-badge status-active">ACTIVE</span>
+      </div>
+      <div style="margin-bottom: 1rem;">
+       <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="font-weight: 600;">Capacity</span> <span style="font-weight: 700; color: #f59e0b;">60%</span>
+       </div>
+       <div class="capacity-bar">
+        <div class="capacity-fill" style="width: 60%; background: #f59e0b;"></div>
+       </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+       <div>
+        <strong>Type:</strong> Compactor Truck
+       </div>
+       <div>
+        <strong>Driver:</strong> Vijay Sharma
+       </div>
+       <div>
+        <strong>Max Capacity:</strong> 5000 kg
+       </div>
+       <div>
+        <strong>Phone:</strong> 9876543214
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div><!-- Request Pickup Page -->
+  <div id="requestPickupPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+     <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">🚛 Request Waste Pickup</h1>
+     <form id="pickupForm" onsubmit="submitPickupRequest(event)">
+      <div class="form-group"><label class="form-label" for="pickupName">Full Name *</label> <input type="text" id="pickupName" class="form-input" required placeholder="Enter your full name">
+      </div>
+      <div class="form-group"><label class="form-label" for="pickupPhone">Phone Number *</label> <input type="tel" id="pickupPhone" class="form-input" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}">
+      </div>
+      <div class="form-group"><label class="form-label" for="pickupEmail">Email (Optional)</label> <input type="email" id="pickupEmail" class="form-input" placeholder="Enter your email">
+      </div>
+      <div class="form-group"><label class="form-label" for="pickupArea">Area *</label> <select id="pickupArea" class="form-select" required> <option value="">Select Area</option> <option value="Hazratganj">Hazratganj</option> <option value="Gomti Nagar">Gomti Nagar</option> <option value="Aliganj">Aliganj</option> <option value="Indira Nagar">Indira Nagar</option> <option value="Alambagh">Alambagh</option> <option value="Aminabad">Aminabad</option> <option value="Chowk">Chowk</option> <option value="Mahanagar">Mahanagar</option> <option value="Rajajipuram">Rajajipuram</option> <option value="Vikas Nagar">Vikas Nagar</option> </select>
+      </div>
+      <div class="form-group"><label class="form-label" for="pickupAddress">Complete Address *</label> <textarea id="pickupAddress" class="form-textarea" required placeholder="Enter your complete address with landmark"></textarea>
+      </div>
+      <div class="form-group"><label class="form-label">Select Waste Types *</label>
+       <div class="checkbox-grid"><label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Steel" class="checkbox-input"> <span>🔩 Steel (₹45/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Iron" class="checkbox-input"> <span>⚙️ Iron (₹40/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Aluminum" class="checkbox-input"> <span>🥫 Aluminum (₹120/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Plastic" class="checkbox-input"> <span>♻️ Plastic (₹15/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Paper" class="checkbox-input"> <span>📄 Paper (₹8/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Newspaper" class="checkbox-input"> <span>📰 Newspaper (₹10/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Cardboard" class="checkbox-input"> <span>📦 Cardboard (₹6/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Glass" class="checkbox-input"> <span>🍾 Glass (₹5/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="Metal Cans" class="checkbox-input"> <span>🥫 Metal Cans (₹22/kg)</span> </label> <label class="checkbox-label"> <input type="checkbox" name="wasteType" value="E-Waste" class="checkbox-input"> <span>💻 E-Waste (₹30/kg)</span> </label>
+       </div>
+      </div>
+      <div class="form-group"><label class="form-label" for="estimatedWeight">Estimated Weight (kg) *</label> <input type="number" id="estimatedWeight" class="form-input" required placeholder="Enter estimated weight" min="5" step="0.1"> <small style="color: var(--gray-color);">Minimum 5 kg required for pickup</small>
+      </div>
+      <div class="form-group"><label class="form-label" for="pickupDate">Preferred Pickup Date *</label> <input type="date" id="pickupDate" class="form-input" required>
+      </div>
+      <div id="estimatedPriceDisplay" style="padding: 1.5rem; background: #f0f9ff; border-radius: 0.75rem; margin-bottom: 1.5rem; display: none;">
+       <h3 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 0.5rem;">Estimated Earnings</h3>
+       <p style="font-size: 2rem; font-weight: 800; color: var(--success-color);" id="estimatedPrice">₹0</p><small style="color: var(--gray-color);">*Final amount will be calculated after weighing</small>
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: center;"><button type="button" class="btn-secondary" onclick="calculateEstimate()">Calculate Estimate</button> <button type="submit" class="btn-primary">Submit Request</button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div><!-- Complaint Page -->
+  <div id="complaintPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+     <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">📢 File a Complaint</h1>
+     <form id="complaintForm" onsubmit="submitComplaint(event)">
+      <div class="form-group"><label class="form-label" for="complaintName">Full Name *</label> <input type="text" id="complaintName" class="form-input" required placeholder="Enter your full name">
+      </div>
+      <div class="form-group"><label class="form-label" for="complaintPhone">Phone Number *</label> <input type="tel" id="complaintPhone" class="form-input" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}">
+      </div>
+      <div class="form-group"><label class="form-label" for="complaintEmail">Email (Optional)</label> <input type="email" id="complaintEmail" class="form-input" placeholder="Enter your email">
+      </div>
+      <div class="form-group"><label class="form-label" for="complaintArea">Area *</label> <select id="complaintArea" class="form-select" required> <option value="">Select Area</option> <option value="Hazratganj">Hazratganj</option> <option value="Gomti Nagar">Gomti Nagar</option> <option value="Aliganj">Aliganj</option> <option value="Indira Nagar">Indira Nagar</option> <option value="Alambagh">Alambagh</option> <option value="Aminabad">Aminabad</option> <option value="Chowk">Chowk</option> <option value="Mahanagar">Mahanagar</option> <option value="Rajajipuram">Rajajipuram</option> <option value="Vikas Nagar">Vikas Nagar</option> </select>
+      </div>
+      <div class="form-group"><label class="form-label" for="complaintAddress">Complete Address *</label> <textarea id="complaintAddress" class="form-textarea" required placeholder="Enter your complete address with landmark"></textarea>
+      </div>
+      <div class="form-group"><label class="form-label" for="complaintMessage">Complaint Description *</label> <textarea id="complaintMessage" class="form-textarea" required placeholder="Describe your complaint in detail" style="min-height: 150px;"></textarea>
+      </div>
+      <div style="text-align: center;"><button type="submit" class="btn-primary" style="padding: 1rem 3rem;">Submit Complaint</button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div><!-- Contact Page -->
+  <div id="contactPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card">
+     <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">📞 Contact Us</h1>
+     <div class="stats-grid">
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        📍
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Office Address</h3>
+       <p style="color: var(--gray-color); font-size: 1.125rem;">Nagar Nigam Bhawan<br>
+         Hazratganj, Lucknow - 226001<br>
+         Uttar Pradesh, India</p>
+      </div>
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        📞
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Phone Numbers</h3>
+       <p style="color: var(--gray-color); font-size: 1.125rem;">Office: +91-522-2234567<br>
+         Toll Free: 1800-180-5151<br>
+         WhatsApp: +91-98765-43210</p>
+      </div>
+      <div style="text-align: center; padding: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem;">
+        ✉️
+       </div>
+       <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Email</h3>
+       <p style="color: var(--gray-color); font-size: 1.125rem;">support@nnlucknow.gov.in<br>
+         zerowaste@nnlucknow.gov.in<br>
+         info@nnlucknow.gov.in</p>
+      </div>
+     </div>
+     <div style="margin-top: 3rem;">
+      <h2 style="font-size: 2rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Send Us a Message</h2>
+      <form id="contactForm" onsubmit="submitContactForm(event)" style="max-width: 600px; margin: 0 auto;">
+       <div class="form-group"><label class="form-label" for="contactFormName">Name *</label> <input type="text" id="contactFormName" class="form-input" required>
+       </div>
+       <div class="form-group"><label class="form-label" for="contactFormEmail">Email *</label> <input type="email" id="contactFormEmail" class="form-input" required>
+       </div>
+       <div class="form-group"><label class="form-label" for="contactFormPhone">Phone *</label> <input type="tel" id="contactFormPhone" class="form-input" required pattern="[0-9]{10}">
+       </div>
+       <div class="form-group"><label class="form-label" for="contactFormMessage">Message *</label> <textarea id="contactFormMessage" class="form-textarea" required style="min-height: 150px;"></textarea>
+       </div>
+       <div style="text-align: center;"><button type="submit" class="btn-primary" style="padding: 1rem 3rem;">Send Message</button>
+       </div>
+      </form>
+     </div>
+     <div style="margin-top: 3rem; padding: 2rem; background: #f0f9ff; border-radius: 1rem; text-align: center;">
+      <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Office Hours</h3>
+      <p style="font-size: 1.125rem; color: var(--text-color);"><strong>Monday - Friday:</strong> 10:00 AM - 6:00 PM<br><strong>Saturday:</strong> 10:00 AM - 2:00 PM<br><strong>Sunday:</strong> Closed<br><strong>Emergency:</strong> 24/7 Available</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- Admin Login Page -->
+  <div id="adminLoginPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card" style="max-width: 500px; margin: 0 auto;">
+     <h1 style="font-size: 2.5rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">🔐 Admin Login</h1>
+     <form id="adminLoginForm" onsubmit="adminLogin(event)">
+      <div class="form-group"><label class="form-label" for="adminUsername">Username</label> <input type="text" id="adminUsername" class="form-input" required placeholder="Enter admin username">
+      </div>
+      <div class="form-group"><label class="form-label" for="adminPassword">Password</label> <input type="password" id="adminPassword" class="form-input" required placeholder="Enter admin password">
+      </div>
+      <div style="text-align: center;"><button type="submit" class="btn-primary" style="padding: 1rem 3rem; width: 100%;"> Login as Admin </button>
+      </div>
+     </form>
+     <div style="margin-top: 2rem; padding: 1rem; background: #f0f9ff; border-radius: 0.5rem; text-align: center;"><small style="color: var(--gray-color);"> Default credentials:<br>
+        Username: <strong>admin</strong><br>
+        Password: <strong>admin123</strong> </small>
+     </div>
+    </div>
+   </div>
+  </div><!-- Public Login Page -->
+  <div id="publicLoginPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="glass-card" style="max-width: 500px; margin: 0 auto;">
+     <h1 style="font-size: 2.5rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">👤 Public Login</h1>
+     <form id="publicLoginForm" onsubmit="publicLogin(event)">
+      <div class="form-group"><label class="form-label" for="publicPhone">Phone Number</label> <input type="tel" id="publicPhone" class="form-input" required placeholder="Enter your 10-digit phone number" pattern="[0-9]{10}">
+      </div>
+      <div style="text-align: center;"><button type="submit" class="btn-primary" style="padding: 1rem 3rem; width: 100%;"> Login / Register </button>
+      </div>
+     </form>
+     <div style="margin-top: 2rem; padding: 1rem; background: #f0f9ff; border-radius: 0.5rem;">
+      <p style="color: var(--gray-color); text-align: center;">New user? No worries! Just enter your phone number and we'll create an account for you automatically.</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- Admin Dashboard Page -->
+  <div id="adminDashboardPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">📊 Admin Dashboard</h1>
+    <div class="stats-grid">
+     <div class="stat-card">
+      <div class="stat-icon">
+       👥
+      </div>
+      <div class="stat-value">
+       500+
+      </div>
+      <div class="stat-label">
+       Total Users
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       📋
+      </div>
+      <div class="stat-value">
+       45
+      </div>
+      <div class="stat-label">
+       Pending Requests
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ✅
+      </div>
+      <div class="stat-value">
+       1200
+      </div>
+      <div class="stat-label">
+       Completed Pickups
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       📢
+      </div>
+      <div class="stat-value">
+       12
+      </div>
+      <div class="stat-label">
+       Active Complaints
+      </div>
+     </div>
+    </div>
+    <div class="glass-card" style="margin-top: 2rem;">
+     <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem;">Recent Pickup Requests</h2>
+     <div class="request-card" style="border-left-color: #f59e0b;">
+      <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+       <div>
+        <div style="font-size: 1.5rem; font-weight: 700;">
+         Amit Kumar
+        </div>
+        <div style="font-size: 0.875rem; color: var(--gray-color);">
+         ID: REQ001
+        </div>
+       </div><span class="status-badge status-pending">PENDING</span>
+      </div>
+      <p><strong>Area:</strong> Hazratganj</p>
+      <p><strong>Waste:</strong> Steel, Plastic, Paper</p>
+      <p><strong>Weight:</strong> 25 kg | <strong>Amount:</strong> ₹850</p>
+      <p><strong>Date:</strong> Tomorrow</p>
+      <div style="margin-top: 1rem; display: flex; gap: 1rem;"><button class="btn-success" onclick="showToast('Request approved!', 'success')">Approve</button> <button class="btn-danger" onclick="showToast('Request rejected', 'error')">Reject</button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div><!-- User Dashboard Page -->
+  <div id="userDashboardPage" class="page">
+   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 3rem; text-align: center; color: var(--primary-color); margin-bottom: 2rem;">👤 My Dashboard</h1>
+    <div class="stats-grid">
+     <div class="stat-card">
+      <div class="stat-icon">
+       📋
+      </div>
+      <div class="stat-value">
+       8
+      </div>
+      <div class="stat-label">
+       Total Requests
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ✅
+      </div>
+      <div class="stat-value">
+       5
+      </div>
+      <div class="stat-label">
+       Completed
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ⏳
+      </div>
+      <div class="stat-value">
+       2
+      </div>
+      <div class="stat-label">
+       Pending
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       💰
+      </div>
+      <div class="stat-value">
+       ₹3,450
+      </div>
+      <div class="stat-label">
+       Total Earnings
+      </div>
+     </div>
+    </div>
+    <div class="glass-card" style="margin-top: 2rem;">
+     <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem;">My Pickup Requests</h2>
+     <div class="request-card" style="border-left-color: #10b981;">
+      <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+       <div>
+        <div style="font-size: 1.25rem; font-weight: 700;">
+         Pickup Request
+        </div>
+        <div style="font-size: 0.875rem; color: var(--gray-color);">
+         ID: REQ12345
+        </div>
+       </div><span class="status-badge status-completed">COMPLETED</span>
+      </div>
+      <p><strong>Waste:</strong> Steel, Aluminum</p>
+      <p><strong>Weight:</strong> 15 kg | <strong>Earned:</strong> ₹850</p>
+      <p><strong>Date:</strong> 15 Dec 2024</p>
+     </div>
+     <div class="request-card" style="border-left-color: #f59e0b;">
+      <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+       <div>
+        <div style="font-size: 1.25rem; font-weight: 700;">
+         Pickup Request
+        </div>
+        <div style="font-size: 0.875rem; color: var(--gray-color);">
+         ID: REQ12346
+        </div>
+       </div><span class="status-badge status-pending">PENDING</span>
+      </div>
+      <p><strong>Waste:</strong> Paper, Cardboard</p>
+      <p><strong>Weight:</strong> 10 kg | <strong>Est. Earnings:</strong> ₹100</p>
+      <p><strong>Date:</strong> Tomorrow</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- Footer -->
+  <footer class="footer">
+   <div class="container">
+    <div class="footer-grid">
+     <div class="footer-section">
+      <h3>About Us</h3>
+      <p>Nagar Nigam Lucknow is committed to making Lucknow a cleaner, greener city through innovative waste management solutions.</p>
+     </div>
+     <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+       <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+       <li><a href="#" onclick="showPage('prices'); return false;">Waste Prices</a></li>
+       <li><a href="#" onclick="showPage('requestPickup'); return false;">Request Pickup</a></li>
+       <li><a href="#" onclick="showPage('trackVehicle'); return false;">Track Vehicle</a></li>
+       <li><a href="#" onclick="showPage('complaint'); return false;">File Complaint</a></li>
+      </ul>
+     </div>
+     <div class="footer-section">
+      <h3>Contact Info</h3>
+      <ul style="list-style: none;">
+       <li style="margin-bottom: 0.75rem;">📍 Hazratganj, Lucknow - 226001</li>
+       <li style="margin-bottom: 0.75rem;">📞 +91-522-2234567</li>
+       <li style="margin-bottom: 0.75rem;">✉️ support@nnlucknow.gov.in</li>
+      </ul>
+     </div>
+     <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div style="display: flex; gap: 1rem; margin-top: 1rem; font-size: 2rem;"><a href="#" style="text-decoration: none;">📘</a> <a href="#" style="text-decoration: none;">🐦</a> <a href="#" style="text-decoration: none;">📸</a>
+      </div>
+     </div>
+    </div>
+    <div class="footer-bottom">
+     <p>© 2024 Nagar Nigam Lucknow. All rights reserved.</p>
+     <p>Made with 💚 for a cleaner Lucknow</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+        // Constants
+        const API_URL = 'http://localhost:5000/api';
+        
+        const WASTE_PRICES = {
+            'Steel': 45,
+            'Iron': 40,
+            'Aluminum': 120,
+            'Plastic': 15,
+            'Paper': 8,
+            'Newspaper': 10,
+            'Cardboard': 6,
+            'Glass': 5,
+            'Metal Cans': 22,
+            'E-Waste': 30
+        };
+
+        // Auth State
+        let currentUser = null;
+        let authToken = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for stored auth
+            const storedToken = localStorage.getItem('token');
+            const storedUser = localStorage.getItem('user');
+            
+            if (storedToken && storedUser) {
+                authToken = storedToken;
+                currentUser = JSON.parse(storedUser);
+                updateAuthUI();
+            }
+
+            // Set minimum date for pickup
+            const pickupDateInput = document.getElementById('pickupDate');
+            if (pickupDateInput) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                pickupDateInput.min = tomorrow.toISOString().split('T')[0];
+                pickupDateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+
+            // Update active nav link
+            updateActiveNavLink('home');
+        });
+
+        // Page Navigation
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            const pageMap = {
+                'home': 'homePage',
+                'about': 'aboutPage',
+                'prices': 'pricesPage',
+                'trackVehicle': 'trackVehiclePage',
+                'requestPickup': 'requestPickupPage',
+                'complaint': 'complaintPage',
+                'contact': 'contactPage',
+                'adminLogin': 'adminLoginPage',
+                'publicLogin': 'publicLoginPage',
+                'adminDashboard': 'adminDashboardPage',
+                'userDashboard': 'userDashboardPage'
+            };
+
+            const pageId = pageMap[pageName];
+            if (pageId) {
+                document.getElementById(pageId).classList.add('active');
+                updateActiveNavLink(pageName);
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function updateActiveNavLink(pageName) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase().replace(' ', '') === pageName.toLowerCase()) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function showDashboard() {
+            if (currentUser && currentUser.type === 'admin') {
+                showPage('adminDashboard');
+            } else if (currentUser && currentUser.type === 'user') {
+                showPage('userDashboard');
+            }
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+
+        // Auth Functions
+        function updateAuthUI() {
+            const authButtons = document.getElementById('authButtons');
+            const userSection = document.getElementById('userSection');
+            const userName = document.getElementById('userName');
+
+            if (currentUser) {
+                authButtons.classList.add('hidden');
+                userSection.classList.remove('hidden');
+                userName.textContent = currentUser.username || currentUser.full_name || currentUser.phone;
+            } else {
+                authButtons.classList.remove('hidden');
+                userSection.classList.add('hidden');
+            }
+        }
+
+        async function adminLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/admin/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    authToken = data.token;
+                    currentUser = { ...data.admin, type: 'admin' };
+                    localStorage.setItem('token', authToken);
+                    localStorage.setItem('user', JSON.stringify(currentUser));
+                    
+                    updateAuthUI();
+                    showToast('Login successful!', 'success');
+                    showPage('adminDashboard');
+                } else {
+                    showToast(data.message || 'Login failed', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showToast('Login failed. Please try again.', 'error');
+            }
+        }
+
+        async function publicLogin(event) {
+            event.preventDefault();
+            
+            const phone = document.getElementById('publicPhone').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/user/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    authToken = data.token;
+                    currentUser = { ...data.user, type: 'user' };
+                    localStorage.setItem('token', authToken);
+                    localStorage.setItem('user', JSON.stringify(currentUser));
+                    
+                    updateAuthUI();
+                    showToast('Login successful!', 'success');
+                    showPage('userDashboard');
+                } else {
+                    showToast(data.message || 'Login failed. Please register first.', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showToast('Login failed. Please try again.', 'error');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            authToken = null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            updateAuthUI();
+            showToast('Logged out successfully', 'info');
+            showPage('home');
+        }
+
+        // Calculate Estimate
+        function calculateEstimate() {
+            const checkboxes = document.querySelectorAll('input[name="wasteType"]:checked');
+            const weight = parseFloat(document.getElementById('estimatedWeight').value) || 0;
+
+            if (checkboxes.length === 0) {
+                showToast('Please select at least one waste type', 'error');
+                return;
+            }
+
+            if (weight < 5) {
+                showToast('Minimum weight is 5 kg', 'error');
+                return;
+            }
+
+            let totalPrice = 0;
+            const avgPricePerWasteType = [];
+
+            checkboxes.forEach(checkbox => {
+                const wasteType = checkbox.value;
+                if (WASTE_PRICES[wasteType]) {
+                    avgPricePerWasteType.push(WASTE_PRICES[wasteType]);
+                }
+            });
+
+            if (avgPricePerWasteType.length > 0) {
+                const avgPrice = avgPricePerWasteType.reduce((a, b) => a + b, 0) / avgPricePerWasteType.length;
+                totalPrice = avgPrice * weight;
+            }
+
+            document.getElementById('estimatedPrice').textContent = `₹${totalPrice.toFixed(2)}`;
+            document.getElementById('estimatedPriceDisplay').style.display = 'block';
+            
+            showToast('Estimate calculated successfully!', 'success');
+        }
+
+        // Submit Pickup Request
+        async function submitPickupRequest(event) {
+            event.preventDefault();
+
+            const checkboxes = document.querySelectorAll('input[name="wasteType"]:checked');
+            if (checkboxes.length === 0) {
+                showToast('Please select at least one waste type', 'error');
+                return;
+            }
+
+            const wasteTypes = Array.from(checkboxes).map(cb => cb.value).join(', ');
+            const weight = parseFloat(document.getElementById('estimatedWeight').value);
+
+            if (weight < 5) {
+                showToast('Minimum weight is 5 kg', 'error');
+                return;
+            }
+
+            // Calculate estimated price
+            const selectedTypes = Array.from(checkboxes).map(cb => cb.value);
+            const avgPrices = selectedTypes.map(type => WASTE_PRICES[type] || 0);
+            const avgPrice = avgPrices.reduce((a, b) => a + b, 0) / avgPrices.length;
+            const estimatedPrice = avgPrice * weight;
+
+            const requestData = {
+                request_id: 'REQ' + Date.now(),
+                user_id: currentUser ? currentUser.user_id : 'U' + Date.now(),
+                user_name: document.getElementById('pickupName').value,
+                phone: document.getElementById('pickupPhone').value,
+                email: document.getElementById('pickupEmail').value || null,
+                area: document.getElementById('pickupArea').value,
+                address: document.getElementById('pickupAddress').value,
+                waste_types: wasteTypes,
+                estimated_weight: weight,
+                estimated_price: estimatedPrice.toFixed(2),
+                pickup_date: document.getElementById('pickupDate').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/pickup-requests/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken ? `Bearer ${authToken}` : ''
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast('Pickup request submitted successfully!', 'success');
+                    document.getElementById('pickupForm').reset();
+                    document.getElementById('estimatedPriceDisplay').style.display = 'none';
+                    
+                    // Show confirmation modal
+                    setTimeout(() => {
+                        alert(`✅ Request Confirmed!\n\nRequest ID: ${requestData.request_id}\nEstimated Earnings: ₹${estimatedPrice.toFixed(2)}\n\nOur team will contact you soon!`);
+                    }, 500);
+                } else {
+                    showToast(data.message || 'Failed to submit request', 'error');
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                showToast('Failed to submit request. Please try again.', 'error');
+            }
+        }
+
+        // Submit Complaint
+        async function submitComplaint(event) {
+            event.preventDefault();
+
+            const complaintData = {
+                complaint_id: 'COMP' + Date.now(),
+                user_id: currentUser ? currentUser.user_id : null,
+                user_name: document.getElementById('complaintName').value,
+                phone: document.getElementById('complaintPhone').value,
+                email: document.getElementById('complaintEmail').value || null,
+                area: document.getElementById('complaintArea').value,
+                address: document.getElementById('complaintAddress').value,
+                complaint_message: document.getElementById('complaintMessage').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/complaints/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken ? `Bearer ${authToken}` : ''
+                    },
+                    body: JSON.stringify(complaintData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast('Complaint submitted successfully!', 'success');
+                    document.getElementById('complaintForm').reset();
+                    
+                    setTimeout(() => {
+                        alert(`✅ Complaint Registered!\n\nComplaint ID: ${complaintData.complaint_id}\n\nWe will address your complaint within 24-48 hours.`);
+                    }, 500);
+                } else {
+                    showToast(data.message || 'Failed to submit complaint', 'error');
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                showToast('Failed to submit complaint. Please try again.', 'error');
+            }
+        }
+
+        // Submit Contact Form
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            showToast('Message sent successfully! We will get back to you soon.', 'success');
+            document.getElementById('contactForm').reset();
+        }
+
+        // Load Vehicles
+        function loadVehicles() {
+            showToast('Vehicles refreshed', 'info');
+        }
+
+        function filterVehicles() {
+            const area = document.getElementById('areaFilter').value;
+            if (area) {
+                showToast(`Filtering vehicles in ${area}`, 'info');
+            } else {
+                showToast('Showing all vehicles', 'info');
+            }
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a379928722e7937',t:'MTc2Mzk3MzU5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
